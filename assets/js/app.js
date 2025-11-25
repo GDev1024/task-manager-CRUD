@@ -12,3 +12,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// Welcome screen fade in effect
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const welcome = document.getElementById('welcome');
+        const main = document.getElementById('main-content');
+
+        welcome.style.transition = 'opacity 0.8s ease';
+        welcome.style.opacity = 0;
+
+        setTimeout(() => {
+            welcome.style.display = 'none';
+            main.style.display = 'block';
+            main.style.opacity = 0;
+            main.style.transition = 'opacity 0.8s ease';
+            setTimeout(() => { main.style.opacity = 1; }, 50);
+        }, 800);
+    }, 2000);
+});
