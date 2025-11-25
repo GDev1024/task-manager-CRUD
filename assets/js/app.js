@@ -1,5 +1,5 @@
-// Simple toggle task status without page reload (Optional)
 document.addEventListener('DOMContentLoaded', () => {
+    // Toggle task status 
     const toggles = document.querySelectorAll('.status-toggle');
     toggles.forEach(toggle => {
         toggle.addEventListener('change', function() {
@@ -11,29 +11,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(data => console.log('Status updated'));
         });
     });
-});
 
-// Welcome screen fade in effect
-document.addEventListener('DOMContentLoaded', () => {
+    // Welcome screen animation
     const welcome = document.getElementById('welcome-animation');
-    if(welcome){
-        setTimeout(() => { welcome.style.display = 'none'; }, 2500);
-    }
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const welcome = document.getElementById('welcome-animation');
-    if(welcome){
+    if (welcome) {
         setTimeout(() => { welcome.style.display = 'none'; }, 2500);
     }
 
-    // Initialize calendar
+    // Calendar 
     const calendarEl = document.getElementById('calendar');
-    if(calendarEl){
+    if (calendarEl) {
+        const calendarEvents = window.calendarEvents || [];
         const calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             height: 400,
-            events: <?php echo $calendarEventsJSON; ?>,
+            events: calendarEvents,
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',

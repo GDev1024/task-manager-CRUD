@@ -10,17 +10,6 @@ if (!isset($_SESSION['welcome_shown'])) {
     $showWelcome = true;
 }
 
-// Prepare tasks for calendar
-$calendarEvents = array_map(function($task) {
-    return [
-        'title' => $task['title'],
-        'start' => date('Y-m-d'), // For now, just show today (can extend to due date)
-        'color' => $task['status'] === 'completed' ? '#5cb85c' : '#f0ad4e'
-    ];
-}, $tasks);
-
-$calendarEventsJSON = json_encode($calendarEvents);
-
 // Handle filter and search
 $search = $_GET['search'] ?? '';
 $filter = $_GET['filter'] ?? 'all';
@@ -31,7 +20,19 @@ $tasks = getTasks($conn, $search, $filter);
 $total = count($tasks);
 $completed = count(array_filter($tasks, fn($t) => $t['status'] === 'completed'));
 $pending = $total - $completed;
+
+// Calendar tasks event initialization
+$calendarEvents = array_map(function($task) {
+    return [
+        'title' => $task['title'],
+        'start' => date('Y-m-d'), // for now, just show today
+        'color' => $task['status'] === 'completed' ? '#5cb85c' : '#f0ad4e'
+    ];
+}, $tasks);
+
+$calendarEventsJSON = json_encode($calendarEvents);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
