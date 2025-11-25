@@ -4,8 +4,9 @@ include "functions/task_functions.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $_POST['title'];
-    $status = $_POST['status'];
-    createTask($conn, $title, $status);
+    $due_date = $_POST['due_date'];
+    $status = 'pending'; // always pending on creation
+    createTask($conn, $title, $due_date, $status);
     header("Location: index.php");
     exit();
 }
@@ -21,16 +22,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="container">
     <h1>Add New Task</h1>
 
-    <form method="POST" class="task-form">
+    <form method="POST">
         <input type="text" name="title" placeholder="Task title..." required>
-        <select name="status">
-            <option value="pending">Pending</option>
-            <option value="completed">Completed</option>
-        </select>
-        <button type="submit" class="btn add">Save Task</button>
+        <label>Due Date:</label>
+        <input type="date" name="due_date" required>
+        <button type="submit" class="btn btn-add">Save Task</button>
     </form>
 
-    <a href="index.php" class="btn edit">Back to Tasks</a>
+    <a href="index.php" class="btn btn-edit" style="margin-top:15px;">Back to Tasks</a>
 </div>
 </body>
 </html>

@@ -3,33 +3,29 @@ session_start();
 include 'functions/db.php';
 include 'functions/task_functions.php';
 
-// Session-based welcome animation
+// Welcome animation session
 $showWelcome = false;
 if (!isset($_SESSION['welcome_shown'])) {
     $_SESSION['welcome_shown'] = true;
     $showWelcome = true;
 }
 
-// Handle filter and search
+// Handle filter/search
 $search = $_GET['search'] ?? '';
 $filter = $_GET['filter'] ?? 'all';
-
 $tasks = getTasks($conn, $search, $filter);
 
 // Stats
 $total = count($tasks);
-$completed = count(array_filter($tasks, fn($t) => $t['status'] === 'completed'));
+$completed = count(array_filter($tasks, fn($t) => $t['status']==='completed'));
 $pending = $total - $completed;
 
 // Calendar events
-$calendarEvents = array_map(function($task) {
-    return [
-        'title' => $task['title'],
-        'start' => date('Y-m-d'),
-        'color' => $task['status'] === 'completed' ? '#5cb85c' : '#f0ad4e'
-    ];
-}, $tasks);
-
+$calendarEvents = array_map(fn($task)=>[
+    'title'=>$task['title'],
+    'start'=>$task['due_date'],
+    'color'=>$task['status']==='completed'?'#5cb85c':'#f0ad4e'
+], $tasks);
 $calendarEventsJSON = json_encode($calendarEvents);
 ?>
 
@@ -52,14 +48,14 @@ $calendarEventsJSON = json_encode($calendarEvents);
 <div class="container">
     <h1>Task Manager</h1>
 
-    <!-- Stats Widget -->
+    <!-- Stats -->
     <div class="stats">
-        <div>Total Tasks: <?php echo $total; ?></div>
-        <div>Completed: <?php echo $completed; ?></div>
-        <div>Pending: <?php echo $pending; ?></div>
+        <div>Total Tasks: <?= $total ?></div>
+        <div>Completed: <?= $completed ?></div>
+        <div>Pending: <?= $pending ?></div>
     </div>
 
-    <!-- Search & Filter -->
+    <!-- Search/Filter -->
     <form method="GET" class="search-filter">
         <input type="text" name="search" placeholder="Search tasks..." value="<?= htmlspecialchars($search) ?>">
         <select name="filter">
@@ -71,7 +67,7 @@ $calendarEventsJSON = json_encode($calendarEvents);
         <a href="create.php" class="btn add">+ Add Task</a>
     </form>
 
-    <!-- Task Cards -->
+    <!-- Task cards -->
     <div class="task-list">
         <?php if(empty($tasks)): ?>
             <p class="no-tasks">No tasks found.</p>
@@ -79,6 +75,7 @@ $calendarEventsJSON = json_encode($calendarEvents);
             <?php foreach($tasks as $task): ?>
             <div class="task-card">
                 <h3 class="task-title"><?= htmlspecialchars($task['title']) ?></h3>
+                <p>Due: <?= $task['due_date'] ?></p>
                 <div class="task-buttons">
                     <span class="status <?= $task['status'] ?>"><?= ucfirst($task['status']) ?></span>
                     <a href="edit.php?id=<?= $task['id'] ?>" class="btn edit">Edit</a>
@@ -93,9 +90,8 @@ $calendarEventsJSON = json_encode($calendarEvents);
     <div id="calendar"></div>
 </div>
 
-<!-- Pass PHP events to JS -->
 <script>
-    window.calendarEvents = <?= $calendarEventsJSON ?>;
+window.calendarEvents = <?= $calendarEventsJSON ?>;
 </script>
 <script src="assets/js/app.js"></script>
 </body>
