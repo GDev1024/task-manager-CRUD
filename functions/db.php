@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = ""; // your MySQL password
-$dbname = "task_manager"; // database name
+$password = ""; 
+$dbname = "task_manager"; 
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

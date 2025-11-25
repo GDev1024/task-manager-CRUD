@@ -14,20 +14,32 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Welcome screen fade in effect
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        const welcome = document.getElementById('welcome');
-        const main = document.getElementById('main-content');
+document.addEventListener('DOMContentLoaded', () => {
+    const welcome = document.getElementById('welcome-animation');
+    if(welcome){
+        setTimeout(() => { welcome.style.display = 'none'; }, 2500);
+    }
+});
 
-        welcome.style.transition = 'opacity 0.8s ease';
-        welcome.style.opacity = 0;
+document.addEventListener('DOMContentLoaded', () => {
+    const welcome = document.getElementById('welcome-animation');
+    if(welcome){
+        setTimeout(() => { welcome.style.display = 'none'; }, 2500);
+    }
 
-        setTimeout(() => {
-            welcome.style.display = 'none';
-            main.style.display = 'block';
-            main.style.opacity = 0;
-            main.style.transition = 'opacity 0.8s ease';
-            setTimeout(() => { main.style.opacity = 1; }, 50);
-        }, 800);
-    }, 2000);
+    // Initialize calendar
+    const calendarEl = document.getElementById('calendar');
+    if(calendarEl){
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            height: 400,
+            events: <?php echo $calendarEventsJSON; ?>,
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            }
+        });
+        calendar.render();
+    }
 });
