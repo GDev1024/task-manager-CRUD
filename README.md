@@ -7,7 +7,7 @@ The application supports full CRUD operations, task filtering, search, statistic
 
 ---
 
-##🚀 Live Demo
+🚀 Live Demo
 
 🔗 Live Application:
 https://task-manager.page.gd/
@@ -49,27 +49,28 @@ https://task-manager.page.gd/
 -Deployed MySQL database (InfinityFree hosting)
 ---
 
-## Folder Structure
+## 📁 Folder Structure
 
 task-manager-CRUD/
 │
 ├── assets/
 │   ├── css/
-│   │   └── style.css        # Main application CSS
+│   │   └── style.css              # Main application CSS
+│   │
 │   └── js/
-│       └── app.js          # JS for animation & calendar
+│       └── app.js                 # JS for animation & calendar
 │
 ├── functions/
-│   ├── db.php              # Database connection
-│   └── task_functions.php  # CRUD + Query logic
+│   ├── db.php                     # Database connection
+│   └── task_functions.php         # CRUD + query logic
 │
 ├── sql/
-│   └── task_manager.sql    # Full exported database
+│   └── task_manager.sql           # Exported database structure
 │
-├── index.php               # Homepage (task list + stats + calendar)
-├── create.php              # Add Task form
-├── edit.php                # Edit Task form
-└── delete.php              # Task deletion handler
+├── index.php                      # Homepage (tasks + stats + calendar)
+├── create.php                     # Add Task form
+├── edit.php                       # Edit Task form
+└── delete.php                     # Task deletion handler
 
 
 ---
