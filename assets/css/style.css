@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #89f7fe, #66a6ff) 
+    font-family: 'Play', sans-serif;
     margin: 20px;
 }
 
@@ -15,4 +18,23 @@ table {
     background: black;
     color: white;
     text-decoration: none;
+}
+
+.task-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.task-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    transition: all 0.2s ease-in-out;
+}
+
+@media (max-width: 600px) {
+    .task-card { padding: 10px; font-size: 14px; }
+    table { font-size: 14px; }
 }
