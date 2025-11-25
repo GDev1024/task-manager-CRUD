@@ -1,52 +1,74 @@
-# Task Manager Web Application
+# 🎯Task Manager Web Application
 
-A modern **Task Manager** web application built with **PHP, MySQL, HTML, CSS, and JavaScript**.  
-It allows users to create, read, update, and delete tasks, with a sleek, responsive **UI/UX** and a **welcome animation**.
+A modern, responsive Task Manager web application built using PHP, MySQL, HTML, CSS, and JavaScript.
+This project was developed, version-controlled, and deployed as part of the Full Stack CRUD App assignment under the Data Structures & Algorithms course at T.A. Marryshow Community College (TAMCC).
+
+The application supports full CRUD operations, task filtering, search, statistics, and an integrated calendar widget.
+
+---
+##🚀 Live Demo
+
+🔗 Live Application:
+https://task-manager.page.gd/
 
 ---
 
 ## Features
 
-- Full CRUD functionality:
-  - Add new tasks
-  - Edit existing tasks
-  - Delete tasks
-  - View all tasks
-- Task status tracking: **Pending** or **Completed**
-- Search tasks by title
-- Filter tasks by status
-- Modern **UX/UI design**:
-  - Gradient background
-  - Card layout for tasks
-  - Hover effects and smooth transitions
-  - Status badges for quick visual feedback
-- **Welcome animation** on page load
-- Responsive layout for mobile and desktop
-- Clean, modular PHP code using functions
+✅Core CRUD Features
 
+-Create new tasks
+-Edit existing tasks
+-Delete tasks
+-View all tasks in a clean, card-based layout
+
+🎯 Productivity Tools
+
+-Task status: Pending / Completed
+-Search bar to find tasks quickly
+-Filter dropdown to view tasks by status
+-Task statistics widget
+-FullCalendar integration (task schedule preview)
+
+🎨 UI/UX Enhancements
+
+-Modern responsive layout
+-Smooth hover interactions
+-Gradient page styling
+-"Welcome to Task Manager" intro animation
+-Mobile-first design
+-Matching styled form fields and query boxes
+
+🛠️ Backend & Code Quality
+
+-MySQL database with structured schema
+-Parameterized SQL queries
+-Modular PHP (functions separated for clarity)
+-Clean folder organization
+-Deployed MySQL database (InfinityFree hosting)
 ---
 
 ## Folder Structure
 
-task_manager/
-│
-├── functions/
-│ ├── db.php # Database connection
-│ └── task_functions.php # CRUD and search/filter functions
+task-manager-CRUD/
 │
 ├── assets/
-│ ├── css/
-│ │ └── style.css # Main CSS (UI/UX enhancements)
-│ └── js/
-│ └── app.js # Welcome animation and page interactions
+│   ├── css/
+│   │   └── style.css        # Main application CSS
+│   └── js/
+│       └── app.js          # JS for animation & calendar
+│
+├── functions/
+│   ├── db.php              # Database connection
+│   └── task_functions.php  # CRUD + Query logic
 │
 ├── sql/
-│ └── task_manager.sql # Database creation and sample data
+│   └── task_manager.sql    # Full exported database
 │
-├── index.php # Main task list page
-├── create.php # Add new task page
-├── edit.php # Edit task page
-└── delete.php # Delete task page
+├── index.php               # Homepage (task list + stats + calendar)
+├── create.php              # Add Task form
+├── edit.php                # Edit Task form
+└── delete.php              # Task deletion handler
 
 
 ---
@@ -62,10 +84,16 @@ task_manager/
 
 ---
 
-## Usage
+## 📝 Assignment Requirements Covered
 
--Click + Add Task to create a new task
--Click Edit to update a task
--Click Delete to remove a task
--Use the search bar to find tasks by title
--Use the filter dropdown to view pending or completed tas
+✔ Git & Version Control
+✔ GitHub Repository with commit history
+✔ Professionally structured project
+✔ Fully functional CRUD operations
+✔ Database exported as .sql
+✔ Online deployment of app + database
+✔ Additional features beyond baseline:
+-Calendar
+-Statistics widget
+-UI animations
+-Search & Filter
