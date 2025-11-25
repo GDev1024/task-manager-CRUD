@@ -1,11 +1,9 @@
 <?php
-include 'functions/db.php';
+include "functions/db.php";
+include "functions/task_functions.php";
 
 $id = $_GET['id'];
-
-$stmt = $conn->prepare("DELETE FROM tasks WHERE id=?");
-$stmt->bind_param("i", $id);
-$stmt->execute();
+deleteTask($conn, $id);
 
 header("Location: index.php");
 exit();

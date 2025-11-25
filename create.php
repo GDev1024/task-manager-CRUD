@@ -1,25 +1,36 @@
 <?php
-include 'functions/db.php';
-include 'functions/header.php';
+include "functions/db.php";
+include "functions/task_functions.php";
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $task = $_POST['task'];
-
-    $stmt = $conn->prepare("INSERT INTO tasks (task) VALUES (?)");
-    $stmt->bind_param("s", $task);
-    $stmt->execute();
-
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $title = $_POST['title'];
+    $status = $_POST['status'];
+    createTask($conn, $title, $status);
     header("Location: index.php");
     exit();
 }
 ?>
 
-<h2>Add New Task</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Add Task</title>
+</head>
+<body>
+<div class="container">
+    <h1>Add New Task</h1>
 
-<form method="POST">
-    <label>Task:</label><br>
-    <input type="text" name="task" required><br><br>
-    <button type="submit">Save</button>
-</form>
+    <form method="POST">
+        <input type="text" name="title" placeholder="Task title..." required>
+        <select name="status">
+            <option value="pending">Pending</option>
+            <option value="completed">Completed</option>
+        </select>
+        <button type="submit" class="btn btn-add">Save Task</button>
+    </form>
 
-<?php include 'functions/footer.php'; ?>
+    <a href="index.php" class="btn btn-edit" style="margin-top:15px;">Back to Tasks</a>
+</div>
+</body>
+</html>
