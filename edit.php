@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h1>Edit Task</h1>
 
     <form method="POST">
-        <input type="text" name="title" value="<?= $task['title'] ?>" required>
+        <input type="text" name="title" value="<?= htmlspecialchars($task['title']) ?>" required>
         <select name="status">
             <option value="pending" <?= $task['status']=='pending'?'selected':'' ?>>Pending</option>
             <option value="completed" <?= $task['status']=='completed'?'selected':'' ?>>Completed</option>

@@ -4,7 +4,6 @@ include "functions/task_functions.php";
 
 $tasks = getTasks($conn);
 
-// Handle search/filter
 $search = $_GET['search'] ?? '';
 $filter = $_GET['filter'] ?? 'all';
 
@@ -23,9 +22,10 @@ if ($search || $filter != 'all') {
 <div class="container">
     <h1>Task Manager</h1>
 
+    <!-- Search & Filter -->
     <div class="search-bar">
         <form method="GET">
-            <input type="text" name="search" placeholder="Search tasks..." value="<?= $search ?>">
+            <input type="text" name="search" placeholder="Search tasks..." value="<?= htmlspecialchars($search) ?>">
             <select name="filter">
                 <option value="all" <?= $filter=='all'?'selected':'' ?>>All</option>
                 <option value="pending" <?= $filter=='pending'?'selected':'' ?>>Pending</option>
@@ -35,20 +35,25 @@ if ($search || $filter != 'all') {
         </form>
     </div>
 
+    <!-- Add Task -->
     <a href="create.php" class="btn btn-add">+ Add Task</a>
 
-    <?php foreach($tasks as $task): ?>
-        <div class="task-card">
-            <div class="task-title"><?= $task['title'] ?></div>
-            <div>
-                <span class="badge <?= $task['status'] ?>"><?= ucfirst($task['status']) ?></span>
-                <a href="edit.php?id=<?= $task['id'] ?>" class="btn btn-edit">Edit</a>
-                <a href="delete.php?id=<?= $task['id'] ?>" class="btn btn-delete" onclick="return confirm('Delete this task?');">Delete</a>
+    <!-- Task Cards -->
+    <?php if (!empty($tasks)): ?>
+        <?php foreach($tasks as $task): ?>
+            <div class="task-card">
+                <div class="task-title"><?= htmlspecialchars($task['title']) ?></div>
+                <div>
+                    <span class="badge <?= $task['status'] ?>"><?= ucfirst($task['status']) ?></span>
+                    <a href="edit.php?id=<?= $task['id'] ?>" class="btn btn-edit">Edit</a>
+                    <a href="delete.php?id=<?= $task['id'] ?>" class="btn btn-delete" onclick="return confirm('Delete this task?');">Delete</a>
+                </div>
             </div>
-        </div>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p>No tasks found.</p>
+    <?php endif; ?>
 </div>
-
 <script src="assets/js/app.js"></script>
 </body>
 </html>
