@@ -14,10 +14,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         calendar.render();
     }
+});
 
-    // Welcome animation
+document.addEventListener('DOMContentLoaded', () => {
     const welcome = document.getElementById('welcome-animation');
-    if(welcome){
-        setTimeout(()=>{ welcome.style.display='none'; }, 2500);
+
+    if (welcome) {
+        // Add fade-out class AFTER 2 seconds
+        setTimeout(() => {
+            welcome.classList.add('fade-out');
+        }, 2000);
+
+        // Remove the welcome div completely after fade-out animation ends
+        setTimeout(() => {
+            welcome.remove();
+        }, 3000);
     }
 });
+
