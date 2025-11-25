@@ -1,35 +1,54 @@
 <?php
-include 'functions/db.php';
-include 'functions/header.php';
+include "functions/db.php";
+include "functions/task_functions.php";
 
-$result = $conn->query("SELECT * FROM tasks ORDER BY id DESC");
+$tasks = getTasks($conn);
+
+// Handle search/filter
+$search = $_GET['search'] ?? '';
+$filter = $_GET['filter'] ?? 'all';
+
+if ($search || $filter != 'all') {
+    $tasks = searchTasks($conn, $search, $filter);
+}
 ?>
 
-<a href="create.php" class="btn">Add New Task</a>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Task Manager</title>
+</head>
+<body>
+<div class="container">
+    <h1>Task Manager</h1>
 
-<table border="1" cellpadding="10" cellspacing="0">
-    <tr>
-        <th>ID</th>
-        <th>Task</th>
-        <th>Status</th>
-        <th>Created</th>
-        <th>Actions</th>
-    </tr>
+    <div class="search-bar">
+        <form method="GET">
+            <input type="text" name="search" placeholder="Search tasks..." value="<?= $search ?>">
+            <select name="filter">
+                <option value="all" <?= $filter=='all'?'selected':'' ?>>All</option>
+                <option value="pending" <?= $filter=='pending'?'selected':'' ?>>Pending</option>
+                <option value="completed" <?= $filter=='completed'?'selected':'' ?>>Completed</option>
+            </select>
+            <button type="submit" class="btn btn-add">Filter</button>
+        </form>
+    </div>
 
-    <?php while ($row = $result->fetch_assoc()): ?>
-    <tr>
-        <td><?= $row['id']; ?></td>
-        <td><?= $row['task']; ?></td>
-        <td><?= ucfirst($row['status']); ?></td>
-        <td><?= $row['created_at']; ?></td>
-        <td>
-            <a href="update.php?id=<?= $row['id']; ?>">Edit</a> |
-            <a href="delete.php?id=<?= $row['id']; ?>" onclick="return confirm('Delete this task?');">
-                Delete
-            </a>
-        </td>
-    </tr>
-    <?php endwhile; ?>
-</table>
+    <a href="create.php" class="btn btn-add">+ Add Task</a>
 
-<?php include 'functions/footer.php'; ?>
+    <?php foreach($tasks as $task): ?>
+        <div class="task-card">
+            <div class="task-title"><?= $task['title'] ?></div>
+            <div>
+                <span class="badge <?= $task['status'] ?>"><?= ucfirst($task['status']) ?></span>
+                <a href="edit.php?id=<?= $task['id'] ?>" class="btn btn-edit">Edit</a>
+                <a href="delete.php?id=<?= $task['id'] ?>" class="btn btn-delete" onclick="return confirm('Delete this task?');">Delete</a>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>
