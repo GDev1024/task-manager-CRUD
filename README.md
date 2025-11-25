@@ -6,6 +6,7 @@ This project was developed, version-controlled, and deployed as part of the Full
 The application supports full CRUD operations, task filtering, search, statistics, and an integrated calendar widget.
 
 ---
+
 ##🚀 Live Demo
 
 🔗 Live Application:
