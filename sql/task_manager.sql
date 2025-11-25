@@ -1,18 +1,17 @@
--- Task Manager Database Export
--- Creating the Database
-CREATE DATABASE IF NOT EXISTS task_manager;
-USE task_manager;
+-- Create database
+CREATE DATABASE IF NOT EXISTS task_manager_crud;
+USE task_manager_crud;
 
--- Creating the Tasks Table
+-- Create tasks table
 CREATE TABLE IF NOT EXISTS tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    task VARCHAR(255) NOT NULL,
-    status ENUM('pending','completed') DEFAULT 'pending',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    title VARCHAR(255) NOT NULL,
+    status ENUM('pending','completed') DEFAULT 'pending'
 );
 
--- Sample Data (Optional)
-INSERT INTO tasks (task, status) VALUES 
-('Finish assignment', 'pending'),
-('Study for DSA quiz', 'completed'),
-('Take a walk', 'pending');
+-- Sample data
+INSERT INTO tasks (title, status) VALUES 
+('Finish prepare for DSA quiz', 'pending'),
+('Buy groceries', 'completed'),
+('Call mom', 'pending'),
+('Clean the house', 'completed');
