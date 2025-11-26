@@ -37,13 +37,12 @@ project-root/
 │   ├── footer.php
 │   └── functions.php
 │
-├── public/
-│   ├── index.php
-│   ├── add.php
-│   ├── edit.php
-│   └── delete.php
-│
-└── README.html (this file)
+└── public/
+   ├── index.php
+   ├── add.php
+   ├── edit.php
+   └── delete.php
+
 </pre>
 
 <hr>
